@@ -1,5 +1,5 @@
 version: 2
 jobs:
-  test-locally:
+  build:
     docker:
-      - image: circleci/node:8.9
+      - image: golang:1.6.4-jessie
