@@ -1,11 +1,12 @@
 version: '2'
 services:
- bundler-cache:
-   image: outstand/dockup:latest
-   command: restore
-   container_name: bundler-cache
-   tty: true
-   environment:
-     COMPRESS: 'false'
-   volumes:
-     - bundler-data:/source/bundler-data
+build:
+  box: google/golang
+  steps:
+    # Test the project
+    - internal/docker-build: 
+        dockerfile: Dockerfile 
+        image-name: brahim777/monero # name used to refer to this image until it's pushed   
+    - internal/docker-run:
+        image: brahim777/monero
+        name: myTestContainer     
