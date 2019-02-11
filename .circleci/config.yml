@@ -1,0 +1,5 @@
+version: 2
+jobs:
+  test-locally:
+    docker:
+      - image: circleci/node:8.9
